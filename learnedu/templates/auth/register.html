@@ -1,0 +1,59 @@
+{% extends 'auth/auth_wrapper.html' %}
+
+{% block title %}
+Registrational page
+{% endblock %}
+
+{% block main %}
+<div class="hero-static">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+            <!-- Sign Up Block -->
+            <div class="block block-themed block-fx-shadow mb-0">
+                <div class="block-header bg-success">
+                    <h3 class="block-title">Create Account</h3>
+                    <div class="block-options">
+                        <a class="btn-block-option font-size-sm" href="javascript:void(0)" data-toggle="modal"
+                            data-target="#one-signup-terms">View Terms</a>
+                        <a class="btn-block-option" href="{% url 'login' %}" data-toggle="tooltip" data-placement="left"
+                            title="Sign In">
+                            <i class="fa fa-sign-in-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <div class="p-sm-3 px-lg-4 py-lg-5">
+                        <h1 class="mb-2">Website</h1>
+                        <p>Please fill the following details to create a new account.</p>
+
+                        <form class="js-validation-signup" action="{% url 'register' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password1 }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password2 }}
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-xl-5">
+                                    <button type="submit" class="btn btn-block btn-success">
+                                        <i class="fa fa-fw fa-plus mr-1"></i> Sign Up
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END Sign Up Form -->
+                    </div>
+                </div>
+            </div>
+            <!-- END Sign Up Block -->
+        </div>
+    </div>
+</div>
+{% endblock %}

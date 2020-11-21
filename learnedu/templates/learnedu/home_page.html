@@ -1,0 +1,47 @@
+{% extends 'learnedu/main_wrapper.html' %}
+{% load static %}
+
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block main %}
+<div class="row p-5">
+    <div class="col-md-6 px-4">
+        <h1 class="display-4">About Us</h1>
+        <p class="lead">Divide have don't man where in air fourth. Own itself make have night won't make.<br>
+        A you under Seed appear which good give. Own give air without fowl moveth dry first<br>
+        heaven fruit, she'd won't very all.</p>
+    </div>
+    <div class="col-md-6 px-4">
+        <h1 class="display-4">Free courses</h1>
+        <p class="lead">Divide have don't man where in air fourth. Own itself make have night won't make.<br>
+        A you under Seed appear which good give. Own give air without fowl moveth dry first<br>
+        heaven fruit, she'd won't very all.</p>
+    </div>
+</div>
+<hr>
+<div class="row p-5">
+    <div class="col-md-12" style="display:flex; flex-direction: column; justify-content: center;">
+        <h1 class="display-4" style="text-align: center;">Our Work Process</h1>
+        <p class="lead" style="text-align: center;">Was years it seasons was there form he in in them together over that,
+        <br>third sixth gathered female creeping bearing behold years.</p>
+        <div class="embed-responsive embed-responsive-16by9">
+            <video controls poster="{% static 'assets/media/videos/hero_tech.jpg' %}">
+                <source src="{% static 'assets/media/videos/hero_tech.mp4'%}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</div>
+<div class="row p-5">
+    <div class="col-md-12">
+        <h1 class="display-4">Our main goal</h1>
+        <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum impedit consequuntur optio qui,
+        error est harum in eaque dolores magnam esse nisi sed distinctio quod doloribus sapiente obcaecati natus? Laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eius autem, ducimus quisquam omnis cupiditate nihil
+        exercitationem numquam doloribus nobis officia rem nostrum eos at ad accusantium modi accusamus fuga.</p>
+    </div>
+</div>
+{% endblock %}
