@@ -1,4 +1,10 @@
+# Editor's settings
+.vscode
+
+# Virtual environment file
 venv
 
+# Personal
 migrations
+*.sqlite3
 __pycache__
