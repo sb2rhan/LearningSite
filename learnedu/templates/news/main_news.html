@@ -1,0 +1,76 @@
+{% extends 'learnedu/main_wrapper.html' %}
+
+{% block title %}
+News page
+{% endblock %}
+
+{% block main %}
+{% if perms.news.add_news %}
+<div class="row p-4">
+    <div class="col-md-12 px-4">
+        <h3 class="m-2">Add fresh news</h3>
+        <button type="button" class="btn btn-primary m-2"
+        data-toggle="modal" data-target="#exampleModal">Add a new post</button>
+        <hr>
+    </div>
+</div>
+{% endif %}
+<div class="row p-4">
+    <div class="col-md-12" style="display:flex; flex-direction: column; justify-content: center;">
+        <ul class="list-unstyled">
+        {% for n in news %}
+            {% if n.is_active == True %}
+            <div class="card mb-3">
+                {% if n.image %}
+                <img height="300" src="{{ n.image.url }}" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ n.get_absolute_url }}">{{ n.title }}</a>
+                    </h5>
+                    <p class="card-text">{{ n.content }}</p>
+                    <p class="card-text"><small class="text-muted">{{ n.publish_date }}</small></p>
+                </div>
+                <div class="card-footer">
+                    <p class="text-muted">By {{ n.author.get_username }}</p>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- enctype is needed to send images -->
+                <form method='POST' action="{% url 'create_news' %}" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.title }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.themes }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.content }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image }}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

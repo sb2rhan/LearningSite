@@ -11,6 +11,11 @@ class UserForm(UserCreationForm):
         self.fields['username'].widget.attrs['placeholder'] = 'Username'
         self.fields['email'].widget.attrs['class'] = 'form-control form-control-lg form-control-alt'
         self.fields['email'].widget.attrs['placeholder'] = 'Email'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control form-control-lg form-control-alt'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Firstname'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control form-control-lg form-control-alt'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Lastname'
+        self.fields['groups'].widget.attrs['class'] = 'form-control form-control-lg form-control-alt'
         self.fields['password1'].widget.attrs['class'] = 'form-control form-control-lg form-control-alt'
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
         self.fields['password2'].widget.attrs['class'] = 'form-control form-control-lg form-control-alt'
@@ -18,4 +23,4 @@ class UserForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'first_name', 'last_name', 'groups', 'password1', 'password2']

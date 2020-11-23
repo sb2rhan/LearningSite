@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.home_page, name='home'),
     path('admin/', admin.site.urls),
     path('auth/', include('auth_user.urls')),
+    path('news/', include('news.urls')),
 ]
 
 if settings.DEBUG == True:

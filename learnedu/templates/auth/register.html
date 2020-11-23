@@ -23,19 +23,42 @@ Registrational page
                 </div>
                 <div class="block-content">
                     <div class="p-sm-3 px-lg-4 py-lg-5">
-                        <h1 class="mb-2">Website</h1>
-                        <p>Please fill the following details to create a new account.</p>
+                        <h1 class="mb-2">LearnEdu</h1>
+                        <p>Please fill the following details to create a new teacher or student account.</p>
 
                         <form class="js-validation-signup" action="{% url 'register' %}" method="POST">
                             {% csrf_token %}
+
                             <div class="form-group">
+                                {{ form.username.errors }}
                                 {{ form.username }}
+                                {{ form.username.help_text }}
                             </div>
                             <div class="form-group">
+                                {{ form.email.errors }}
                                 {{ form.email }}
+                                {{ form.email.help_text }}
                             </div>
                             <div class="form-group">
+                                {{ form.first_name.errors }}
+                                {{ form.first_name }}
+                                {{ form.first_name.help_text }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.last_name.errors }}
+                                {{ form.last_name }}
+                                {{ form.last_name.help_text }}
+                            </div>
+                            <div class="form-group">
+                                <label>Choose your group:</label>
+                                {{ form.groups.errors }}
+                                {{ form.groups }}
+                                {{ form.groups.help_text }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password1.errors }}
                                 {{ form.password1 }}
+                                {{ form.password1.help_text }}
                             </div>
                             <div class="form-group">
                                 {{ form.password2 }}

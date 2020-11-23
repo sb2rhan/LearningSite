@@ -1,0 +1,64 @@
+{% extends 'learnedu/main_wrapper.html' %}
+
+{% block title %}
+News '{{ news.title }}'
+{% endblock %}
+
+{% block main %}
+<div class="row p-4">
+    <div class="col-md-12" style="display:flex; flex-direction: column; justify-content: center;">
+        <div class="card mb-3">
+            <h3 class="display-4 text-center card-header">{{ news.title }}</h3>
+            {% if news.image %}
+            <img height="400" src="{{ news.image.url }}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <p class="card-text lead">{{ news.content }}</p>
+                <p class="card-text lead"><small class="text-muted">{{ news.publish_date }}</small></p>
+            </div>
+            <div class="card-footer">
+                <p class="text-muted">By {{ news.author.get_username }}</p>
+                {% if perms.news.delete_news or news.author == request.user %}
+                <a class="btn btn-danger" href="{% url 'delete_news' id=news.id %}">Delete</a>
+                {% endif %}
+                {% if perms.news.change_news or news.author == request.user %}
+                <a class="btn btn-primary"
+                data-toggle="modal" data-target="#exampleModal">Edit the post</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method='POST' action="{% url 'edit_news' id=news.id %}" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.title }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.themes }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.content }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image }}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
