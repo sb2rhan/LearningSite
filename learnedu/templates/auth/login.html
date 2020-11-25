@@ -10,7 +10,7 @@ Login page
             <div class="col-md-8 col-lg-6 col-xl-4">
                 <!-- Sign In Block -->
                 <div class="block block-themed block-fx-shadow mb-0">
-                    <div class="block-header">
+                    <div class="block-header bg-info">
                         <h3 class="block-title">Sign In</h3>
                         <div class="block-options">
                             <a class="btn-block-option font-size-sm" href="#">Forgot Password?</a>
@@ -22,7 +22,7 @@ Login page
                     </div>
                     <div class="block-content">
                         <div class="p-sm-3 px-lg-4 py-lg-5">
-                            <p>Welcome, please login.</p>
+                            <p class="lead">Welcome user, please log in.</p>
 
                             <form class="js-validation-signin" action="{% url 'login' %}" method="POST">
                                 {% csrf_token %}
@@ -46,7 +46,7 @@ Login page
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-6 col-xl-5">
-                                        <button type="submit" class="btn btn-block btn-primary">
+                                        <button type="submit" class="btn btn-block btn-info border">
                                             <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                                         </button>
                                     </div>

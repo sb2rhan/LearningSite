@@ -11,9 +11,6 @@
         <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Blogs</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="{% url 'news' %}">News</a>
       </li>
       {% if request.user.is_authenticated %}
@@ -22,8 +19,8 @@
           {{ request.user }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Cabinet</a>
+          <a class="dropdown-item" href="{{ request.user.profile.get_absolute_url }}">Profile</a>
+          <a class="dropdown-item" href="{% url 'courses_page' username=request.user.username %}">Courses</a>
           <a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a>
         </div>
       </li>

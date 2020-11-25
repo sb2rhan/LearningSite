@@ -23,7 +23,7 @@ def create_news(request):
             unews.save()
             form.save_m2m()
         else:
-            print('Create form is not valid')
+            print('Create news form is not valid')
 
     return redirect('news')
 

@@ -1,0 +1,111 @@
+{% extends 'learnedu/main_wrapper.html' %}
+{% load static %}
+
+{% block title %}
+Courses
+{% endblock %}
+
+{% block main %}
+{% if perms.profiles.add_course %}
+<div class="row p-4">
+    <div class="col-md-12 px-4">
+        <h3 class="h3 m-2">Add a new course</h3>
+        <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#exampleModal">Add</button>
+        <hr>
+    </div>
+</div>
+{% endif %}
+
+<div class="row p-3">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">All courses</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Enrolled courses</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <h3 class="display-4 text-center my-3">Available courses</h3>
+                        {% if courses %}
+                            <div class="card-deck my-2 py-4">
+                                {% for course in courses %}
+                                    <div class="card">
+                                        <div class="card-body d-flex flex-column justify-content-around">
+                                            <h5 class="card-title">{{ course.name }}</h5>
+                                            <p class="card-text">{{ course.description }}</p>
+                                            <p class="card-text font-italic">Instructor: 
+                                                <a class="link" href="{{ course.instructor.get_absolute_url }}">
+                                                {{ course.instructor.user.username }}</a>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href={% url 'course_detail' username=request.user.username id=course.id %}
+                                            class="card-link">See more...</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-center lead m-4">No courses were added yet...</p>
+                        {% endif %}
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <h3 class="display-4 text-center my-3">Active courses</h3>
+                        {% if enrolled_courses %}
+                            <div class="card-deck my-2 py-4">
+                                {% for course in enrolled_courses %}
+                                    <div class="card">
+                                        <div class="card-body d-flex flex-column justify-content-around">
+                                            <h5 class="card-title">{{ course.name }}</h5>
+                                            <p class="card-text">{{ course.description }}</p>
+                                            <p class="card-text font-italic">Instructor: 
+                                                <a class="link" href="{{ course.instructor.get_absolute_url }}">
+                                                {{ course.instructor.user.username }}</a>
+                                            </p>
+                                        </div>
+                                       <div class="card-footer">
+                                            <a href={% url 'course_detail' username=request.user.username id=course.id %}
+                                            class="card-link">See more...</a>
+                                        </div> 
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-center lead m-4">No courses were added yet...</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method='POST' action="{% url 'create_course' username=request.user.username %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.description }}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

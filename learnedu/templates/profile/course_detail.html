@@ -1,0 +1,38 @@
+{% extends 'learnedu/main_wrapper.html' %}
+{% load static %}
+
+{% block title %}
+Course '{{ course.name }}'
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-12 p-4">
+        <div class="jumbotron bg-white shadow rounded overflow-hidden p-4">
+            <div class="container d-flex flex-column align-items-center">
+                <h3 class="display-4">
+                    {{ course.name }}
+                </h3>
+                <p class="my-4 lead">{{ course.description }}</p>
+            </div>
+            <p class="font-italic mt-5 d-flex justify-content-around">
+                <span>{{course.enroll_count}} enrolled to this course</span>
+                {% if is_enrolled %}
+                    <a href="{% url 'course_unenroll' username=request.user.username id=course.id %}"
+                    class="btn btn-danger">Unenroll me</a>
+                {% else %}
+                    {% if course.instructor.user != request.user %}
+                        <a href="{% url 'course_enroll' username=request.user.username id=course.id %}"
+                        class="btn btn-success">Enroll now</a>
+                    {% else %}
+                        <a href="{% url 'course_delete' username=request.user.username id=course.id %}"
+                        class="btn btn-danger">Delete this course</a>
+                    {% endif %}
+                {% endif %}
+                <span>Instructed by<a href="{{ course.instructor.get_absolute_url }}" class="link">
+                {{course.instructor.user.username}}</a></span>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

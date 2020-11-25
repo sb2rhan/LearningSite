@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'auth_user.apps.AuthUserConfig',
     'news.apps.NewsConfig',
+    'profiles.apps.ProfilesConfig',
 ]
 
 MIDDLEWARE = [
