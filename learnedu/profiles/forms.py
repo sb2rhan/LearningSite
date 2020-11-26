@@ -49,10 +49,14 @@ class CourseForm(forms.ModelForm):
         self.fields['description'].widget.attrs['class'] = 'form-control'
         self.fields['description'].widget.attrs['placeholder'] = 'Description'
         self.fields['instructor'].widget.attrs['class'] = 'form-control'
+        self.fields['duration'].widget.attrs['class'] = 'form-control'
+        self.fields['duration'].widget.attrs['placeholder'] = 'Duration of the course'
+        self.fields['link_material'].widget.attrs['class'] = 'form-control'
+        self.fields['link_material'].widget.attrs['placeholder'] = 'Link to material'
 
     class Meta:
         model = Course
-        fields = ['name', 'description', 'instructor']
+        fields = ['name', 'description', 'instructor', 'duration', 'link_material']
 
 
 # Feature

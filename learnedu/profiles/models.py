@@ -36,7 +36,9 @@ class Course(models.Model):
     name = models.CharField(null=False, blank=False, max_length=200)
     description = models.TextField(null=False, blank=False)
     instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True)
+    duration = models.CharField(max_length=100, default='Regulated by instructor')
     enroll_count = models.BigIntegerField(default=0)
+    link_material = models.CharField(verbose_name="Link to material", max_length=255, null=True, blank=True)
     is_active = models.BooleanField(verbose_name='Is active', default=True, null=False)
 
     def __str__(self):
